@@ -41,30 +41,51 @@
             }
         }
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.querySelector('input[name="name"]').value;
-            const phone = document.querySelector('input[name="phone"]').value;
-            const email = document.querySelector('input[name="email"]').value;
-            const message = document.querySelector('textarea[name="message"]').value;
-            const errorMessage = document.getElementById('errorMessage');
+        
+const slider = document.querySelector('.slider');
+        const topImage = document.querySelector('.top-image');
+        const container = document.querySelector('.container');
 
-            // Reset error message
-            errorMessage.style.display = 'none';
-            errorMessage.textContent = '';
+        let isDragging = false;
 
-            // Validation checks
-            if (name.length < 2) {
-                errorMessage.textContent = 'Name must be at least 2 characters long.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-            if (number.test(phone)) {
-                errorMessage.textContent = 'Phone number must be exactly 10 digits.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-            if (email.test(email)) {
+        slider.addEventListener('mousedown', () => {
+            isDragging = true;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+
+            slider.style.left = x + 'px';
+            topImage.style.clipPath = `inset(0 ${rect.width - x}px 0 0)`;
+        });
+
+        // Optional: Touch support for mobile devices
+        slider.addEventListener('touchstart', () => {
+            isDragging = true;
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+
+            const rect = container.getBoundingClientRect();
+            let x = e.touches[0].clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+
+            slider.style.left = x + 'px';
+            topImage.style.clipPath = `inset(0 ${rect.width - x}px 0 0)`;
+        });            if (email.test(email)) {
                 errorMessage.textContent = 'Please enter a valid email address.';
                 errorMessage.style.display = 'block';
                 return;
