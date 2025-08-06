@@ -89,12 +89,14 @@ Proudly serving Dorset, Somerset, and Devon — wherever you are, we’ll come t
             <div class="testimonial">"Repairs done perfectly, and the team was so friendly. Thanks!" - Mike T.</div>
         </div>
 
-        <h2 id="contact">Contact Us</h2>
-        <form class="contact-form" action="contact.php" method="POST" id="contactForm">
+        <<h2 id="contact">Contact Us</h2>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="58609662-3ea5-4a2c-9580-5d128c1b0abe">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="tel" name="phone" placeholder="Your Phone Number" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
             <button type="submit">Send Message</button>
             <div class="success-message" id="successMessage">Thank you! Your message has been sent.</div>
             <div class="error-message" id="errorMessage"></div>
